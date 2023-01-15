@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+      "test": "nodemon src/home.js",
+      "start": "node src/home.js"
+      },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,4 +16,5 @@
     "nodemon": "^2.0.20",
     "save": "^2.9.0"
   }
+
 }
