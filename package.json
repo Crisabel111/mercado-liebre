@@ -5,8 +5,8 @@
   "main": "app.js",
 
   "scripts": {
-      "test": "nodemon src/home.js",
-      "start": "node src/home.js"
+      "test": "nodemon start",
+      "start": "node app.js"
       },
   "keywords": [],
   "author": "",
