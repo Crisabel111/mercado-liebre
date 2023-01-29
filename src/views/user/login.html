@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de producto</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href="/css/styles-login-registro.css"rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles-home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <!--Include Header-->
+    <%- include('../partials/header') %>
+<main>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Iniciar sesión</h1>
+                <span>Ingresa tus datos</span>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Contraseña" />
+                <a href="#">¿Olvidaste tu contraseña?</a>
+                <button>Iniciar sesion</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right">
+                    <h1>¡Hola!</h1>
+                    <p>Ingresa los datos con los que te registraste y recargate de mucha energía</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</main>
+
+    <script src="/js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>  
+</body>
+</html>

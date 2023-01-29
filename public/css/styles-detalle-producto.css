@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    }
+html,
+body {
+      min-height: 100vh;
+      margin: 0;
+      font-size: 10px;
+    }
+    
+body {
+      font-family: 'Open Sans', sans-serif; 
+      background-color:#ffffff;
+    }
+
+  .small-img-group {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+  }
+
+  .sproduct select {
+    display: block;
+    width: 210px;
+    padding: 5px 10px;
+  }
+
+  .sproduct input{
+    width: 50px;
+    height: 40px;
+    padding-left:10px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+
+  .sproduct input:focus {
+    outline: none;
+  }
+
+  .buy-btn {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background: #ee6d10ef;
+    color: #ebebeb;
+    opacity: 1;
+    transition: 0.3s all;
+  }
+
+  #descripcion-producto {
+    text-align: center;
+    margin-top: 50px;
+    background: linear-gradient(rgba(0, 0, 0, 0.437), rgba(0,0,0,.85)), url("/img/paneles-solares.jpg");
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+#texto-descripcion-producto {
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ee6d10ef;
+}
+.nombre-producto {
+  color: #ee6d10ef;
+  margin-top: 15px;
+}
+.under-line {
+  width: 200px;
+  background-color: #ee6d10ef;
+  border-color: #ee6d10ef;
+  height: 2px;
+
+}
+
+  #featured{
+    background: #ebebeb;
+  }
+  
+
+#productos-relacionados-titulo{
+  text-align: center;
+  margin-top: 50px;
+  color: #ee6d10ef;
+  
+  
+}
+
+
+#productos-relacionados {
+    margin-top: 70px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
+
+.un-producto-relacionado {
+    margin-bottom: 80px;
+}
+
+.nombre-producto-relacionado {
+    font-weight: bold;
+    transition: all 750ms;
+
+}
+
+.nombre-producto-relacionado:hover {
+    color:#ee6d10ef;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.imagen-producto-relacionado {
+    text-align: center;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+}
+
+.imagen-producto-relacionado:hover {
+    cursor: pointer;
+    animation-name: bounce;
+    animation-timing-function:ease;
+}
+
+.nombre-producto{
+  margin-top: 50px;
+}

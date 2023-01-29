@@ -1,5 +1,9 @@
 const express = require ('express');
 const path = require('path');
+const productRoutes = require('./src/routes/productRoutes')
+const mainRoutes = require('./src/routes/mainRoutes')
+const userRoutes = require('./src/routes/userRoutes')
+
 
 const app = express ();
 
@@ -14,3 +18,8 @@ app.listen(3030, () => {
 app.get ('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './src/views/home.html'));
 });
+app.use("/product", productRoutes);
+app.use("/", mainRoutes);
+app.use("/user", userRoutes);
+
+
