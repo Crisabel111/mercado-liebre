@@ -13,6 +13,10 @@ const userControllers = {
     perfilUsuario :(req,res) => {
         res.sendFile(path.resolve(__dirname , '../views/user/vista-usuario.html'));
     },
+
+    vistaAdmin :(req,res) => {
+        res.sendFile(path.resolve(__dirname , '../views/user/vista-admin.html'));
+    },
     editarUsuario:(req,res) => {
         res.sendFile(path.resolve(__dirname , '../views/user/editar-usuario.html'));
     },
