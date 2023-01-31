@@ -32,14 +32,27 @@ rel="stylesheet" />
         </div>
         <div class="usuario-perfil-footer">
           <ul class="datos">
-            <li>Nombre:</li>
-            <li>Correo:</li>
-            <li>Contraseña</li>
+            <div>
+                <!--modicifar el password del usuario-->
+                <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
+                    <label for="contraseña">Ingresa la nueva contraseña<span class="asterisco">*</span></label>
+                    <div>
+                        <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
+                        <span></span>                       
+                    </div>
+                    <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
+                      <label for="contraseña">Confirma la contraseña<span class="asterisco">*</span></label>
+                      <div>
+                          <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
+                          <span></span>                       
+                      </div>
+                </div>
+            </div>
           </ul>
         </div>
         <!-- BOTENES DE EDITAR Y ELIMINAR USUARIO -->
         <div class="d-grid gap-2 d-md-block">
-          <br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="/user/contrasena" role="button">Modificar contraseña</a>
+          <br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="#" role="button">Guardar cambios</a>
         </div>
       </div>
     </section>

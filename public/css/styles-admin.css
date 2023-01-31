@@ -1,10 +1,8 @@
-@charset "UTF-8";
-		@import 'https://fonts.googleapis.com/css?family=Raleway';
+
 		body {
-			font-family: 'Raleway', sans-serif;
+			font-family: 'Open Sans', sans-serif; 
 			font-weight: 300;
 			line-height: 1.42em;
-			color:#4B4A4B;
 			background-color:#FFDAC4;
 			background: url(http://www.pixeden.com/media/k2/galleries/131/002-subtle-light-pattern-background-texture.jpg);
 		}
@@ -47,14 +45,6 @@
 			padding-left:2%;  
 		}
 
-		.listado tr:nth-child(odd) {
-			background-color: #EEEAE7;
-		}
-
-		.listado tr:nth-child(even) {
-			background-color: #FFFFFF;
-		}
-
 		.listado th {
 			background-color: #ee6d10ef;
 		}
@@ -79,7 +69,7 @@
 		}
 
 		.listado td.icono:hover {
-			background-color: #FC1231;
+			background-color: #f36f10ef;
 			
 			box-shadow: #BA0F26 -1px 1px, #BA0F26 -2px 2px, #BA0F26 -3px 3px, #BA0F26 -4px 4px, #BA0F26 -5px 5px, #BA0F26 -6px 6px;
 			transform: translate3d(6px, -6px, 0);

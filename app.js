@@ -15,7 +15,9 @@ app.listen(3030, () => {
     console.log ('Servidor corriendo en el puerto 3030');
 });
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs')  
+app.set('views',(__dirname,'./src/views'));
+ 
 app.get ('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, './src/views/home.html'));
 });
