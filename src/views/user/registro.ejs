@@ -14,10 +14,8 @@ rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
 </head>
+
 <body>
-    
-    <!--Include Header-->
-    <%- include('../partials/header') %>
 
     <main>
 
@@ -30,7 +28,7 @@ rel="stylesheet" />
                     <div class="celda">
                         <label for="nombre">Nombre Completo<span class="asterisco">*</span></label>
                         <div>  
-                            <input type="text" id="nombre" name="name" class="form-control input" > 
+                            <input type="text" id="nombre" name="nombre" class="form-control input" > 
                                                                          
                         </div>
                         
@@ -53,14 +51,19 @@ rel="stylesheet" />
                             <span></span>
                         </div>
                     </div>
-
-                              
+                    <div class="celda" id="campos_tipo-usuario">
+                        <label for="validationDefault01" class="form-label">Tipo de usuario</label>
+                        <select id="validationDefault01" name="tipo" required class="form-control">
+                          <option value="comun">Comun</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                        </div>
 
                     <!--password del usuario-->
                     <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
                         <label for="contraseña">Contraseña<span class="asterisco">*</span></label>
                         <div>
-                            <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
+                            <input type="password" id="password" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
                             <span></span>
                             
                         </div>
@@ -69,9 +72,9 @@ rel="stylesheet" />
                     
                     <!--confirmar password-->
                     <div class="celda" id="campos_contraseña2">      
-                        <label for="confirmar_contraseña">Confirmá contraseña<span class="asterisco">*</span></label>
+                        <label for="confirmar_contraseña">Confirma tu contraseña<span class="asterisco">*</span></label>
                         <div>
-                            <input type="password" id="confirmar_contraseña" class="form-control input" name="confirmPassword" >
+                            <input type="password" id="confirmPassword" class="form-control input" name="confirmPassword" >
                             <span></span>
                         </div>
                     </div>
@@ -80,7 +83,7 @@ rel="stylesheet" />
                 <!--boton + captcha + redireccion-->
                 <div>
                     <!-- falta captcha -->  
-                    <button = type="submit" class="boton color_especial">Registrarte</button>                                
+                    <button = type="submit" class="boton color_especial">Registrar</button>                                
                     <p>¿Ya tenes una cuenta? <a href="/user/login" class="color_especial redireccion">Inicia sesión</a><p> 
                 </div>
        
@@ -91,8 +94,8 @@ rel="stylesheet" />
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-right">
-                    <h1>Registrate</h1>
-                    <p>Por favor, completa los siguientes datos:
+                    <h1>Registrar</h1>
+                    <p>Por favor, completa los siguientes datos
                     </p>
                 </div>
             </div>

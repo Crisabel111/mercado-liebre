@@ -18,9 +18,7 @@ app.listen(3030, () => {
 app.set('view engine', 'ejs')  
 app.set('views',(__dirname,'./src/views'));
  
-app.get ('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './src/views/home.html'));
-});
+
 app.use("/product", productRoutes);
 app.use("/", mainRoutes);
 app.use("/user", userRoutes);

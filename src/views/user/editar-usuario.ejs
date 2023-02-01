@@ -15,6 +15,10 @@ rel="stylesheet" />
 
 </head>
 <body>
+  <!-- Header -->
+<%- include('../partials/header') %>
+<!--  Fin de Header -->
+
     <!-- PERFIL  DE USUARIO -->
     <section class="perfil-usuario">
       <div class="header">
@@ -33,26 +37,52 @@ rel="stylesheet" />
         <div class="usuario-perfil-footer">
           <ul class="datos">
             <div>
-                <!--modicifar el password del usuario-->
+                <!--nombre del usuario-->
+                <div class="celda">
+                    <label for="nombre">Nombre Completo<span class="asterisco">*</span></label>
+                    <div>  
+                        <input type="text" id="nombre" name="name" class="form-control input" > 
+                                                                     
+                    </div>
+                    
+                </div>
+
+                <!--email del usuario-->
+                <div class="celda" id="campos_email">             
+                    <label for="email" >Email<span class="asterisco">*</span></label>
+                    <div class="input-group flex-nowrap">
+                    </div>
+                    <input type="email" id="email" name="email" class="form-control input"  id="email">
+                   
+                </div>
+
+                <!--imagen de perfil del usuario-->
+                <div class="celda" id="campos_imagen">       
+                    <label for="formFile"  class="form-label">Selecciona tu imagen de perfil<span class="asterisco">*</span></label>
+                    <div>
+                        <input type="file" id="imagen" class="form-control input"  name="imagen" >
+                        <span></span>
+                    </div>
+                </div>
+
+                          
+
+                <!--password del usuario-->
                 <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
-                    <label for="contraseña">Ingresa la nueva contraseña<span class="asterisco">*</span></label>
+                    <label for="contraseña">Contraseña<span class="asterisco">*</span></label>
                     <div>
                         <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
-                        <span></span>                       
+                        <span></span>
+                        
                     </div>
-                    <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
-                      <label for="contraseña">Confirma la contraseña<span class="asterisco">*</span></label>
-                      <div>
-                          <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
-                          <span></span>                       
-                      </div>
                 </div>
             </div>
           </ul>
         </div>
         <!-- BOTENES DE EDITAR Y ELIMINAR USUARIO -->
         <div class="d-grid gap-2 d-md-block">
-          <br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="#" role="button">Guardar cambios</a>
+          <br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="#" role="button">Editar Perfil</a>
+          <a type="button" class="btn btn-outline-danger" class="btn btn-primary" href="#" role="button">Eliminar Perfil</a>
         </div>
       </div>
     </section>

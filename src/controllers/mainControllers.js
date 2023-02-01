@@ -1,9 +1,9 @@
 const path = require('path');
 const mainControllers = {
-    carritoCompras : (req,res) => {
-        res.send("main");
-    },
-   
+
+  home:  (req,res) => {
+    res.render('home');
+},
 };
 
 module.exports = mainControllers;

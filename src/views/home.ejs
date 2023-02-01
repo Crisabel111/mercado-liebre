@@ -15,27 +15,7 @@ rel="stylesheet" />
 </head>
 <body>
     <!-- Header -->
-    <header id="header">
-        <i id="burger-menu" class="fa-solid fa-bars fa-2x"></i>
-        <nav>
-            <div id="menu">
-                <div class="col-5 col-md-2">
-                  <img src="/img/panelescolombialogo.png" class="logo-principal">
-                  </a>
-                </div>
-                <ul class="menu-right">
-                    <li class="item"><a href="/" title="Home">Home</a></li>
-                    <li class="item"><a href="/product/detalle-producto" title="Contacto">Productos</a></li>
-                    <li class="item"><a href="/user/registro" title="Contacto">Crear cuenta</a></li>
-                    <li class="item"><a href="/user/login" title="Login">login</a></li>
-                    <li class="item"><a href="/user/perfil" title="Contacto">Mi perfil</a></li>
-                    <li class="item"><a href="/user/logout" title="Login">Logout</a></li>
-                    
-                </ul>
-            </div>
-        </nav>
-    </header>                 
-               
+    <%- include('./partials/header') %>
     <!--  Fin de Header -->
        <!-- Banner -->
 		 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
