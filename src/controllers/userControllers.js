@@ -2,6 +2,7 @@ const path = require('path');
 let db = require('../database/models');
 //Bcryptjs para hashear la password
 const bcrypt = require('bcryptjs');
+const {validationResult, body} = require('express-validator');
 
 const userControllers = {
     //vista del login
@@ -10,34 +11,73 @@ const userControllers = {
     },
 
     //funcionamiento del login
-    processLogin : (req, res) =>{
-        // db.usuario.findAll().then(function(usersDb){
-             
-        //         for(let i = 0; i < usersDb.length; i++){    
-        //             if(usersDb[i].email == req.body.email){
-             
-        //                 //compara passwords
-        //                 if(bcrypt.compareSync(req.body.password, usersDb[i].clave)){
-                            
+    processLogin : (req,res) => {
+        //console.log("entro aqui arriba");
+        console.log(req.body.email);
+        console.log(req.body.password);
+        //Verifica si hubo errores en el form, si no hay errores se fija si el email y la contraseña esten en la base de datos, si hay errores devuelve la misma vista con los mensaje de error
+        let errors = validationResult(req);
+        //console.log("entro aqui abajo");
         
-        //                     var usuarioALogearse = usersDb[i];
-        
-                            
-        //                     break;
-        //                 }
-        //             }
-        //         }
+        //promise de la base de datos, creamos la variable usersDb (array de usuarios) para luego iterar y encontrar el usuario requerido
+        db.usuarios.findAll().then(function(usersDb){
 
-       
-        res.render('user/login');
+            if (errors.isEmpty()) {
+        
+                
+                for(let i = 0; i < usersDb.length; i++){
+
+                    if(usersDb[i].correo == req.body.email){
+                        //console.log(usersDb[i].email);
+                        //console.log(req.body.email);
+                        // console.log("encuentra el email")
+                        // console.log(usersDb[i].clave)
+                        // console.log(req.body.password)
+                        // console.log(typeof(req.body.password))
+                        //console.log(bcrypt.compareSync("12345","$2a$10$0AwX1abvDX/5fHrnvV.4b.NPD4mzcME1xlDGWA"))
+                        //compara passwords
+                        if(bcrypt.compareSync(req.body.password, usersDb[i].clave)){
+                            //console.log("la clave está bien")
+        
+                            var usuarioALogearse = usersDb[i];
+                            //console.log(usuarioALogearse);
+                            
+                            break;
+                        }
+                    }
+                }
+                //si bno coincide el mail o la contraseña usuarioALogearse no se crea por lo tanto es undefine y te tira un error manual en el formulario 
+                if(usuarioALogearse == undefined){
+                    console.log("no se logeo el usuario");
+                    return res.render('user/login', { errors: {
+                        password: {msg:'Credenciales invalidas'}      //esto lo corregi, le faltaba indicar que campo era el mensaje "password" (Martin)
+                }})
+                }
+                /// aca estaria guardando al usuario en session una variable que se comparte en todo el proyecto 
+                req.session.usuarioLogeado = usuarioALogearse;
+                
+        
+                //Se crea la cookie si el usuario hizo click en Recordarme
+                if (req.body.remember_user) {
+                    res.cookie('userEmail',req.body.email, {maxAge : 1000 * 60 * 60 * 15})
+                }
+                res.redirect('/') //si todo sale bien te manda al home 
+            }else{      
+                return res.render( 'user/login', {errors : errors.mapped(), old: req.body})
+            }
+            })
+
+        //res.render('user/login');
     },
 
     //vista del form de registro del usuario
     registroUsuario : (req,res) => {
+        console.log("registro usuario");
         res.render('user/registro');
     },
     // funcionamiento del registro
     CrearUsuario: (req,res) => {
+        console.log(req.body);
         // console.log("nombre:");
         // console.log(req.body.nombre);
         // console.log("email:");
@@ -52,12 +92,18 @@ const userControllers = {
           correo : req.body.email,
           imagen : req.file.filename,
           tipo : req.body.tipo,
-          clave :req.body.password,     
+          clave :bcrypt.hashSync(req.body.password,10),     
           })  
           //reenvia al login para que el usuario inicie session
         res.redirect('/user/login')
 
     },
+        
+    // logeando:(req,res)=>{
+    //     console.log("logeando")
+    //     console.log(req.body)
+    //     res.redirect('/user/login')
+    // },
 
     //vista del perfil del usuario comun
     perfilUsuario :(req,res) => {

@@ -6,7 +6,7 @@ function usuariosData(sequelize, dataTypes){
       id: {type: dataTypes.INTEGER, primaryKey: true, autoIncrement: true},
       nombre: {type: dataTypes.STRING(255)},
       correo: {type: dataTypes.STRING(255)},
-      clave: {type: dataTypes.STRING(45)},
+      clave: {type: dataTypes.STRING(100)},
       imagen: {type: dataTypes.STRING(255)},
       tipo: {type: dataTypes.STRING(255)},
 

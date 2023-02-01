@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const validateLogin = require('../middlewares/validateLogin')
 
 //variable almacenamiento Multer
 const multerDiskStorage = multer.diskStorage({
@@ -19,7 +20,7 @@ const uploadFile = multer({ storage: multerDiskStorage });
 
 //vista del login 
 router.get('/login', userControllers.login);
-router.post('/login', userControllers.processLogin);
+router.post('/login', validateLogin, userControllers.processLogin);
 
 // vista de form de registro
 router.get('/registro', userControllers.registroUsuario);
