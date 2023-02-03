@@ -4,6 +4,7 @@ let db = require('../database/models');
 const bcrypt = require('bcryptjs');
 const {validationResult, body} = require('express-validator');
 
+
 const userControllers = {
     //vista del login
     login : (req,res) => {
@@ -50,7 +51,7 @@ const userControllers = {
                 if(usuarioALogearse == undefined){
                     console.log("no se logeo el usuario");
                     return res.render('user/login', { errors: {
-                        password: {msg:'Credenciales invalidas'}      //esto lo corregi, le faltaba indicar que campo era el mensaje "password" (Martin)
+                        password: {msg:'Credenciales invalidas'}      
                 }})
                 }
                 /// aca estaria guardando al usuario en session una variable que se comparte en todo el proyecto 
@@ -70,13 +71,28 @@ const userControllers = {
         //res.render('user/login');
     },
 
+logout : (req,res) => {
+    req.session.destroy()
+    res.clearCookie('userEmail')
+    return res.render('user/login')
+},
+      
+        
+
+
     //vista del form de registro del usuario
     registroUsuario : (req,res) => {
         console.log("registro usuario");
         res.render('user/registro');
     },
     // funcionamiento del registro
-    CrearUsuario: (req,res) => {
+    CrearUsuario: async (req,res) => {
+        try {
+
+            let datos = req.body;
+            
+            let errors = validationResult(req)
+        
         console.log(req.body);
         // console.log("nombre:");
         // console.log(req.body.nombre);
@@ -86,6 +102,7 @@ const userControllers = {
         // console.log(req.file.filename);
         // console.log("clave:");
         // console.log(req.body.password);
+        if (errors.isEmpty()) {
          
         db.usuarios.create({
           nombre : req.body.nombre,
@@ -95,46 +112,98 @@ const userControllers = {
           clave :bcrypt.hashSync(req.body.password,10),     
           })  
           //reenvia al login para que el usuario inicie session
-        res.redirect('/user/login')
-
-    },
+        res.redirect('/')
+   
+    } else {
+         //elimina la imagen que acabamos de subir
+         if(req.file) {
+		    fs.unlinkSync(__dirname+'/../../public/img/'+req.file.filename);
+		}
         
-    // logeando:(req,res)=>{
-    //     console.log("logeando")
-    //     console.log(req.body)
-    //     res.redirect('/user/login')
-    // },
+       //devuelve la misma vista con los mensajes de error
+       return res.render('user/registro', {errors : errors.mapped(), old: req.body})
 
+      	
+   }
+} catch (error){res.send(error)}
+
+
+
+
+},
+    
+
+
+        
+ 
     //vista del perfil del usuario comun
     perfilUsuario :(req,res) => {
-        // let id_editar=1;
-        // db.usuarios.findOne({
-        //     where : {id:id_editar}
-        // }).then((elUsuario) => {
-        //     console.log(elUsuario)})
-            
-       
-        res.render('user/vista-usuario');
+        //console.log(req.session.usuarioLogeado.id)
+        console.log("perfil usuario")
+        var data={
+            nombre:req.session.usuarioLogeado.nombre,
+            correo:req.session.usuarioLogeado.correo,
+            imagen:req.session.usuarioLogeado.imagen
+        }
+        console.log(data)
+        res.render('user/vista-usuario',{datos:data});
     },
 
     //vista cambiar contraseña usuario comun
     contrasenaUsuario:(req,res) => {
         res.render( 'user/vista-contrasena');
     },
-    //funcionamiento del cambio d ela contraseña usuario comun
+    //funcionamiento del cambio de la contraseña usuario comun
     cambiarContrasena:(req,res) => {
         res.render( 'user/vista-contrasena');
     },
 
     //vista editar usuario
     editarUsuario:(req,res) => {
-        res.render('user/editar-usuario');
+       let actualizarUser = db.usuarios.findByPk(req.params.id)
+		Promise.all([actualizarUser])	
+            .then(function([usuarios]){
+				res.render('user/editar-usuario', {usuarios : usuarios})
+                console.log("voy a editar el usuario")
+			})
+
+        
     },
 
     //funcionamiento de la actualizacion de los datos del usuario 
-    actualizarUsuario:(req,res) => {
-        res.render('user/editar-usuario');
+    actualizarUsuario:(req, res) => {
+        console.log(req.body)
+        console.log(req.params.id)
+        let imagen=req.body.imagen;
+        if(imagen == '' || req.file == undefined){
+            console.log("sin imagen nueva")
+        db.usuarios.update({
+            nombre : req.body.nombre,
+            correo : req.body.email,
+            },{
+                where:{
+                    id:req.params.id
+                }
+            });
+        }else{        
+            //console.log("con imagen nueva")
+            //console.log(req.file)
+            db.usuarios.update({
+                nombre : req.body.nombre,
+                correo : req.body.email,
+                imagen : req.file.filename
+                },{
+                    where:{
+                        id:req.params.id
+                    }
+                });  
+        }
+
+
+		res.redirect('/')
+
     },
+
 
     //vista crear usuario desde el admin
     agregarUsuario :(req,res) => {
@@ -148,19 +217,49 @@ const userControllers = {
 
     //vista del admin 
     vistaAdmin :(req,res) => {
-        res.render( 'user/vista-admin');
+        db.usuarios.findAll()// busca todos los registros del modelo con ese alias 
+			.then(function(usuarios){
+				res.render('user/vista-admin', {usuarios:usuarios})//comparte la variable del modelo con la vista
+            console.log("aqui entra")
+            })
+       
     },
     //funcionamiento  de la vista del admin 
     Admin:(req,res) => {
-        res.render( 'user/vista-admin');
+        
+        
+	
+
     },
+
+
+
     
     //Eliminar usuario
     eliminarUsuario:(req,res) => {
-        res.render('user/home.html');
+        		db.usuarios.destroy({
+			where: {
+				id: req.params.id
+			}
+    
+		})
+        res.redirect('/')
     },
+
+    totalUsuarios: (req,res) => {
+		db.usuarios.findAll()
+			.then(usuarios=> {
+				if(usuarios == null){
+					return res.json({data: 0})
+				}else{
+					return res.json({
+						data: usuarios.length
+					})
+				}
+			})
+	}
     
-  
     
+   
 };
 module.exports = userControllers;  

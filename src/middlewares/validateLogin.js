@@ -32,6 +32,7 @@ const validateLogin = [
             // Si el mail no existe
             if(!encontrado){
               throw new Error('El mail no corresponde a un usuario registrado')
+              console.log("cualquier")
             }
           })
           

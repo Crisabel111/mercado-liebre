@@ -29,6 +29,9 @@ rel="stylesheet" />
                                 <label for="nombre">Nombre Completo<span class="asterisco">*</span></label>
                                 <div>  
                                     <input type="text" id="nombre" name="nombre" class="form-control input" > 
+                                    <% if (locals.errors && errors.name) { %>
+                                        <p class="feedback"><%= errors.name.msg %></p>
+                                    <% } %> 
                                                                                 
                                 </div>
                                 
@@ -49,6 +52,7 @@ rel="stylesheet" />
                                 <div>
                                     <input type="file" id="imagen" class="form-control input"  name="imagen" >
                                     <span></span>
+                                    
                                 </div>
                             </div>
                             <div class="celda" id="campos_tipo-usuario">

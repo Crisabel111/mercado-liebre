@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use( express.static('public') );
 app.use(cookieParser());
-app.use(session({secret: 'Secreto!',
+app.use(session({secret: 'Shhh, Secreto!',
 resave: false,
 saveUninitialized: false,
 }))
@@ -36,5 +36,6 @@ app.set('views',(__dirname,'./src/views'));
 app.use("/product", productRoutes);
 app.use("/", mainRoutes);
 app.use("/user", userRoutes);
+
 
 

@@ -4,6 +4,9 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const validateLogin = require('../middlewares/validateLogin')
+const validateRegister = require('../middlewares/validateRegister')
+const { check } = require('express-validator');
+
 
 //variable almacenamiento Multer
 const multerDiskStorage = multer.diskStorage({
@@ -24,7 +27,7 @@ router.post('/login', validateLogin, userControllers.processLogin);
 
 // vista de form de registro
 router.get('/registro', userControllers.registroUsuario);
-router.post('/registro', uploadFile.single('imagen'),userControllers.CrearUsuario);
+router.post('/registro', uploadFile.single('imagen'), validateRegister, userControllers.CrearUsuario);
 
 //vista del perfil de usuario
 router.get('/perfil', userControllers.perfilUsuario)
@@ -35,8 +38,9 @@ router.get('/contrasena', userControllers.contrasenaUsuario);
 router.put('/contrasena', userControllers.cambiarContrasena);
 
 //vista de editar el usuario
-router.get('/editar', userControllers.editarUsuario)
-router.put('/editar', userControllers.actualizarUsuario)
+router.get('/editar/:id', userControllers.editarUsuario)
+router.post('/editar/:id',uploadFile.single('imagen') ,userControllers.actualizarUsuario)
+
 
 //vista de crear usuario desde el admin 
 router.get('/nuevo-usuario', userControllers.agregarUsuario)
@@ -47,8 +51,12 @@ router.get('/admin', userControllers.vistaAdmin)
 router.post('/admin', userControllers.Admin)
 
 //vista de eliminar usuario 
-router.get('/eliminar', userControllers.eliminarUsuario) 
+router.get('/eliminar/:id', userControllers.eliminarUsuario) 
 
+//en "/logout" se hace el logout del usuario
+router.get('/logout', userControllers.logout)
+
+router.get('/total-usuarios', userControllers.totalUsuarios)
 
 
 

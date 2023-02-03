@@ -23,7 +23,7 @@ rel="stylesheet" />
       <div class="header">
         <div class="cover">
           <div class="perfil-usuario-avatar">
-            <img src="">
+            <img src="/img/<%= datos.imagen %>">
           </div>
         </div>
       </div>
@@ -35,9 +35,9 @@ rel="stylesheet" />
         </div>
         <div class="usuario-perfil-footer">
           <ul class="datos">
-            <li>Nombre:</li>
-            <li>Correo:</li>
-            <li>Contraseña</li>
+            <li>Nombre: <%= datos.nombre %> </li>
+            <li>Correo: <%= datos.correo %> </li>
+            
           </ul>
         </div>
         <!-- BOTENES DE EDITAR Y ELIMINAR USUARIO -->
