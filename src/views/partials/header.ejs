@@ -8,12 +8,20 @@
             </div>
             <ul class="menu-right">
                 <% if (locals.isLogged) { %>
-                <li class="item"><a href="" title="Login">Hola, <%= locals.usuarioLogeado.nombre %></a></li>
+                <li class="item"><a href="#" title="Login">Hola, <%= locals.usuarioLogeado.nombre %></a></li>
                 <li class="item"><a href="/" title="Home">Home</a></li>
                 <li class="item"><a href="/product/detalle-producto" title="Contacto">Productos</a></li>
-                <li class="item"><a href="/user/perfil" title="Contacto">Mi perfil</a></li>
-                <li class="item"><a href="/user/logout" title="Login">Logout</a></li>
+                
               
+                <% if (locals.usuarioLogeado.tipo == "comun") { %>
+                    <li class="item"><a href="/user/perfil" title="Contacto">Mi perfil</a></li>
+    
+                <% } else { %>
+                    <li class="item"><a href="/user/admin" title="Contacto">Perfiles</a></li>
+
+                <% } %>
+                <li class="item"><a href="/user/logout" title="Login">Logout</a></li>
+
                 <% } else { %>
                     <li class="item"><a href="/user/login" title="Login">login</a></li>
                 <% } %>

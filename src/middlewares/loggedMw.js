@@ -13,7 +13,12 @@ function loggedMw (req,res,next) {
 try {
     //Por default el usuario no esta logeado
     res.locals.isLogged = false
-
+    // console.log("usuario en el loggmw")
+    // console.log(req.cookies.userEmail)
+    // if(req.cookies.userEmail == undefined){
+    //     req.cookies.userEmail="noexiste" 
+    // }
+    // console.log(req.cookies.userEmail)
     //Busca el mail del usuario que se logeo, si hizo click en Recordarme (tiene la cookie en su browser)
     
     //Esto es del JSON - ELIMINAR
@@ -21,8 +26,8 @@ try {
 
     db.usuarios.findAll().then(function(usersDb){
 
-        const userInCookie = usersDb.find(element => element.email == req.cookies.userEmail);
-
+        const userInCookie = usersDb.find(element => element.correo == req.cookies.userEmail);
+        //console.log(userInCookie)
     //Si lo encuentra guarda el usuario en la session
     if (userInCookie) {
         req.session.usuarioLogeado = userInCookie

@@ -8,14 +8,15 @@ const {validationResult, body} = require('express-validator');
 const userControllers = {
     //vista del login
     login : (req,res) => {
+        //console.log(req.session.usuarioLogeado)
         res.render('user/login');
     },
 
     //funcionamiento del login
     processLogin : (req,res) => {
         //console.log("entro aqui arriba");
-        console.log(req.body.email);
-        console.log(req.body.password);
+        //console.log(req.body.email);
+        //console.log(req.body.password);
         //Verifica si hubo errores en el form, si no hay errores se fija si el email y la contraseña esten en la base de datos, si hay errores devuelve la misma vista con los mensaje de error
         let errors = validationResult(req);
         //console.log("entro aqui abajo");
@@ -56,7 +57,7 @@ const userControllers = {
                 }
                 /// aca estaria guardando al usuario en session una variable que se comparte en todo el proyecto 
                 req.session.usuarioLogeado = usuarioALogearse;
-                
+                console.log(req.session.usuarioLogeado)
         
                 //Se crea la cookie si el usuario hizo click en Recordarme
                 if (req.body.remember_user) {
@@ -74,7 +75,7 @@ const userControllers = {
 logout : (req,res) => {
     req.session.destroy()
     res.clearCookie('userEmail')
-    return res.render('user/login')
+    return res.redirect('/')
 },
       
         
@@ -82,7 +83,7 @@ logout : (req,res) => {
 
     //vista del form de registro del usuario
     registroUsuario : (req,res) => {
-        console.log("registro usuario");
+        //console.log("registro usuario");
         res.render('user/registro');
     },
     // funcionamiento del registro
@@ -93,7 +94,7 @@ logout : (req,res) => {
             
             let errors = validationResult(req)
         
-        console.log(req.body);
+        console.log(errors);
         // console.log("nombre:");
         // console.log(req.body.nombre);
         // console.log("email:");
@@ -121,7 +122,7 @@ logout : (req,res) => {
 		}
         
        //devuelve la misma vista con los mensajes de error
-       return res.render('user/registro', {errors : errors.mapped(), old: req.body})
+       res.render('user/registro', {errors : errors.mapped(), old: req.body})
 
       	
    }
@@ -138,14 +139,15 @@ logout : (req,res) => {
  
     //vista del perfil del usuario comun
     perfilUsuario :(req,res) => {
-        //console.log(req.session.usuarioLogeado.id)
-        console.log("perfil usuario")
+
         var data={
+            id:req.session.usuarioLogeado.id,
             nombre:req.session.usuarioLogeado.nombre,
             correo:req.session.usuarioLogeado.correo,
             imagen:req.session.usuarioLogeado.imagen
         }
-        console.log(data)
+        //console.log("perfil")
+        //console.log(req.session.usuarioLogeado.tipo)
         res.render('user/vista-usuario',{datos:data});
     },
 
@@ -155,10 +157,34 @@ logout : (req,res) => {
     },
     //funcionamiento del cambio de la contraseña usuario comun
     cambiarContrasena:(req,res) => {
-        res.render( 'user/vista-contrasena');
+        try{
+
+            db.usuarios.findOne({ 'local.email' :  req.usuarios.local.email }, function(err, usuarios) {
+                console.log(req.user.generateHash(req.body.password));
+                console.log(req.user.generateHash(req.body.password_confirmation));
+                     // Si hay errores, se retornan
+                    if (err){
+                        return done(err);
+                    }else {
+                            usuarios.update({ 'local.email' :  req.usuarios.local.email },{'$set':{'local.password':req.usuarios.generateHash(req.body.clave)}},  function(err, usuarios){
+                                console.log(user);
+                            });
+    
+                    }
+    
+            });
+    
+    
+    
+    } catch (e) {
+            res.send('error');
+        }
+        return res.render('admin/userconfiguracion.ejs', {
+                usuarios: req.usuarios
+            });
     },
 
-    //vista editar usuario
+    //vista editar usuariousuarios
     editarUsuario:(req,res) => {
        let actualizarUser = db.usuarios.findByPk(req.params.id)
 		Promise.all([actualizarUser])	
@@ -217,6 +243,7 @@ logout : (req,res) => {
 
     //vista del admin 
     vistaAdmin :(req,res) => {
+
         db.usuarios.findAll()// busca todos los registros del modelo con ese alias 
 			.then(function(usuarios){
 				res.render('user/vista-admin', {usuarios:usuarios})//comparte la variable del modelo con la vista

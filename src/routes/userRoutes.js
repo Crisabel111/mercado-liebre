@@ -6,6 +6,7 @@ const path = require('path');
 const validateLogin = require('../middlewares/validateLogin')
 const validateRegister = require('../middlewares/validateRegister')
 const { check } = require('express-validator');
+const usuarioMiddleware = require('../middlewares/usuarioMiddleware');
 
 
 //variable almacenamiento Multer
@@ -30,12 +31,12 @@ router.get('/registro', userControllers.registroUsuario);
 router.post('/registro', uploadFile.single('imagen'), validateRegister, userControllers.CrearUsuario);
 
 //vista del perfil de usuario
-router.get('/perfil', userControllers.perfilUsuario)
+router.get('/perfil', usuarioMiddleware ,userControllers.perfilUsuario)
 
 
 //cambiar contraseña usuario comun
-router.get('/contrasena', userControllers.contrasenaUsuario);
-router.put('/contrasena', userControllers.cambiarContrasena);
+router.get('/contrasena/:id', userControllers.contrasenaUsuario);
+router.put('/contrasena/:id', userControllers.cambiarContrasena);
 
 //vista de editar el usuario
 router.get('/editar/:id', userControllers.editarUsuario)
@@ -47,7 +48,7 @@ router.get('/nuevo-usuario', userControllers.agregarUsuario)
 router.post('/nuevo-usuario', userControllers.crear)
 
 //vista del admin  (listado de usuarios)
-router.get('/admin', userControllers.vistaAdmin)
+router.get('/admin', usuarioMiddleware ,userControllers.vistaAdmin)
 router.post('/admin', userControllers.Admin)
 
 //vista de eliminar usuario 
