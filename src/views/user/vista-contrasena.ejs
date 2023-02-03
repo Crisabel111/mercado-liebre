@@ -36,6 +36,8 @@ rel="stylesheet" />
         <div class="usuario-perfil-footer">
           <ul class="datos">
             <div>
+
+              <form action="contrasena" method="POST" id="formulario" class="container1" > 
                 <!--modicifar el password del usuario-->
                 <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
                     <label for="contraseña">Ingresa la nueva contraseña<span class="asterisco">*</span></label>
@@ -46,20 +48,24 @@ rel="stylesheet" />
                     <div class="celda" id="campos_contraseña">       <!-- FALTA AGREGAR OPCION VER CONTRASEÑA -->
                       <label for="contraseña">Confirma la contraseña<span class="asterisco">*</span></label>
                       <div>
-                          <input type="password" id="contraseña" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
-                          <span></span>                       
+                        <input type="password" id="confirmPassword" class="form-control input" name="confirmPassword" >                          <span></span>   
+                      </div>  
+                      <div class="d-grid gap-2 d-md-block">
+                        <br>
+                        <button = type="submit" class="btn btn-outline-dark" class="btn btn-primary" >Guardar cambios</button> 
+                        
                       </div>
-                </div>
+                      
+              </form>
+      
             </div>
+        </div>
           </ul>
-        </div>
-        <!-- BOTENES DE EDITAR Y ELIMINAR USUARIO -->
-        <div class="d-grid gap-2 d-md-block">
-          <br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="#" role="button">Guardar cambios</a>
-        </div>
+      </div>
+
       </div>
     </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>  
   </body>
-  
+ 
   </html>

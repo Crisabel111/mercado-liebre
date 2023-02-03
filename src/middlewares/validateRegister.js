@@ -25,7 +25,15 @@ const validateRegister = [
     //Verifica que el email cumpla los requisitos
     check('email')
         .notEmpty().withMessage('Debes completar el email').bail()
-        .isEmail().withMessage('Debes ingresar un email válido')
+        .isEmail().withMessage('Debes ingresar un email válido'),
+
+    check('imagen')
+        .notEmpty().withMessage('Debes ingresar una imagen').bail(),
+  
+    check('tipo')
+        .notEmpty().withMessage('Debes seleccionar un tipo').bail()
+       
+
 
         //Verifica que el email no exista ya en nuestra base de datos
         .custom(async (email, {req}) => {

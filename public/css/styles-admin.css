@@ -79,3 +79,9 @@
 			transition-property: all;
 			transition-timing-function: line;
 		}	
+		#botonRegistro{
+			margin-bottom: 15px;
+		}
+		.cantUsuarios{
+			font-size: 12px;
+		}

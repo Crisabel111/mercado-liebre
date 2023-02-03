@@ -52,15 +52,22 @@ rel="stylesheet" />
 				<% } %>
 			</tbody>
 		</table>
-
+			
 	</div>
-	<br><a type="button" class="btn btn-outline-dark" class="btn btn-primary" href="/user/registro" role="button">Agregar usuario</a>
+	<br><a type="button" id="botonRegistro" class="btn btn-outline-dark" class="btn btn-primary" href="/user/registro" role="button">Agregar usuario</a>
 
 		 
 </div>
+<div class="usuario-perfil-footer">
+	<h3 class="cantUsuarios">Cantidad de usuarios :    </h3>
+	<h5 id="totalUsuarios"></h5>
+</div>
+
 </section>
 
 
         <script src="https://use.fontawesome.com/bf66789927.js"></script>
+		<script src="/js/totalUsuarios.js"></script> 
     </body>
+
     </html>

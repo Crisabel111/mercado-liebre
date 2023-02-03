@@ -24,15 +24,15 @@
     }
     
     p {
-        font-size: 14px;
+        font-size: 8px;
         font-weight: 100;
-        line-height: 15px;
+        line-height: 5px;
         letter-spacing: 0.5px;
         margin: 20px 0 30px;
     }
     
     span {
-        font-size: 12px;
+        font-size: 8px;
     }
     
     a {
@@ -53,6 +53,7 @@
         letter-spacing: 1px;
         text-transform: uppercase;
         transition: transform 80ms ease-in;
+        margin-top: 15px;
     }
     
     button:active {
@@ -69,7 +70,7 @@
     }
     
     form {
-        background-color: #FFFFFF;
+        
         display: flex;
         align-items: center;
         justify-content: center;
@@ -78,14 +79,31 @@
         height: 100%;
         text-align: center;
         
+        
+    }.formulario{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        
+        
     }
+
+
     
     input {
         background-color: #eee;
         border: none;
         padding: 12px 15px;
-        margin: 8px 0;
         width: 100%;
+        line-height: 3px;
+        margin-top:2px;
+        
     }
     
     .container {
@@ -97,8 +115,11 @@
         overflow: hidden;
         width: 768px;
         max-width: 100%;
-        min-height: 480px;
+        height:600px;
     }
+
+    
+  
     
     .form-container {
         position: absolute;
@@ -206,7 +227,21 @@
             z-index: 3;
         }
     }
-    
-   
+
+    .feedback {
+        color: red;
+        font-size: 10px;
+
+    }
+    /* Validaciones en Frontend */
+
+    .invalid {
+        border: solid 1px red;
+        box-shadow: 0 0 10px red;
+      }
+      .error {
+        color: red;
+        display: block;
+      }
     
   

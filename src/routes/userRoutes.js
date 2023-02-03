@@ -24,19 +24,19 @@ const uploadFile = multer({ storage: multerDiskStorage });
 
 //vista del login 
 router.get('/login', userControllers.login);
-router.post('/login', validateLogin, userControllers.processLogin);
+router.post('/login', userControllers.processLogin);
 
 // vista de form de registro
 router.get('/registro', userControllers.registroUsuario);
-router.post('/registro', uploadFile.single('imagen'), validateRegister, userControllers.CrearUsuario);
+router.post('/registro', uploadFile.single('imagen'), userControllers.CrearUsuario);
 
 //vista del perfil de usuario
 router.get('/perfil', usuarioMiddleware ,userControllers.perfilUsuario)
 
 
 //cambiar contraseña usuario comun
-router.get('/contrasena/:id', userControllers.contrasenaUsuario);
-router.put('/contrasena/:id', userControllers.cambiarContrasena);
+router.get('/contrasena/', userControllers.contrasenaUsuario);
+router.post('/contrasena/', userControllers.cambiarContrasena);
 
 //vista de editar el usuario
 router.get('/editar/:id', userControllers.editarUsuario)

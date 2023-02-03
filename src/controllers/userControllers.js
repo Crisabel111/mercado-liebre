@@ -157,31 +157,21 @@ logout : (req,res) => {
     },
     //funcionamiento del cambio de la contraseña usuario comun
     cambiarContrasena:(req,res) => {
+        // console.log("trato de cambiar la password")
+        // console.log(req.body.password)
+        // console.log(req.session.usuarioLogeado.id)
         try{
-
-            db.usuarios.findOne({ 'local.email' :  req.usuarios.local.email }, function(err, usuarios) {
-                console.log(req.user.generateHash(req.body.password));
-                console.log(req.user.generateHash(req.body.password_confirmation));
-                     // Si hay errores, se retornan
-                    if (err){
-                        return done(err);
-                    }else {
-                            usuarios.update({ 'local.email' :  req.usuarios.local.email },{'$set':{'local.password':req.usuarios.generateHash(req.body.clave)}},  function(err, usuarios){
-                                console.log(user);
-                            });
-    
+            db.usuarios.update({
+                clave : bcrypt.hashSync(req.body.password,10),
+                },{
+                    where:{
+                        id:req.session.usuarioLogeado.id
                     }
-    
-            });
-    
-    
-    
+                });
     } catch (e) {
             res.send('error');
         }
-        return res.render('admin/userconfiguracion.ejs', {
-                usuarios: req.usuarios
-            });
+    res.redirect('/')
     },
 
     //vista editar usuariousuarios

@@ -23,14 +23,15 @@ rel="stylesheet" />
             <div class="form-container sign-in-container">    
                 <form action="registro" method="POST" enctype="multipart/form-data" id="formulario" class="container1" >   
                     <div>   
-                        <div>
+                        <div class="campoNombre">
                             <!--nombre del usuario-->
                             <div class="celda">
                                 <label for="nombre">Nombre Completo<span class="asterisco">*</span></label>
                                 <div>  
-                                    <input type="text" id="nombre" name="nombre" class="form-control input" > 
-                                    <% if (locals.errors && errors.name) { %>
-                                        <p class="feedback"><%= errors.name.msg %></p>
+                                    <input type="text" id="nombre" name="nombre" class="form-control input"value="<%= locals.old && old.nombre %>" class="form-control input"  > 
+                                    <span></span>                        
+                                    <% if (locals.errors && errors.nombre) { %>
+                                        <p class="feedback"><%= errors.nombre.msg %></p>
                                     <% } %> 
                                                                                 
                                 </div>
@@ -42,8 +43,12 @@ rel="stylesheet" />
                                 <label for="email" >Email<span class="asterisco">*</span></label>
                                 <div class="input-group flex-nowrap">
                                 </div>
-                                <input type="email" id="email" name="email" class="form-control input"  id="email">
-                            
+                                <input type="email" id="email" name="email" class="form-control input" value="<%= locals.old && old.email %>"  id="email">
+                                <span></span>
+                                <!-- si hubo errores en este campo del form, devuelve un mensaje de error -->
+                                    <% if (locals.errors && errors.email) { %>
+                                        <p class="feedback"><%= errors.email.msg %></p>
+                                    <% } %>  
                             </div>
 
                             <!--imagen de perfil del usuario-->
@@ -52,15 +57,22 @@ rel="stylesheet" />
                                 <div>
                                     <input type="file" id="imagen" class="form-control input"  name="imagen" >
                                     <span></span>
+                                    <% if (locals.errors && errors.imagen){ %>
+                                        <p class="feedback"><%= errors.imagen.msg %></p>
+                                    <% } %>  
                                     
                                 </div>
                             </div>
                             <div class="celda" id="campos_tipo-usuario">
-                                <label for="validationDefault01" class="form-label">Tipo de usuario</label>
+                                <label for="validationDefault01" class="form-label" id="tipo">Tipo de usuario</label>
                                 <select id="validationDefault01" name="tipo" required class="form-control">
                                 <option value="comun">Comun</option>
                                 <option value="admin">Admin</option>
                                 </select>
+                                <span></span>
+                                 <% if (locals.errors && errors.tipo) { %>
+                                        <p class="feedback"><%= errors.tipo.msg %></p>
+                                    <% } %>  
                                 </div>
 
                             <!--password del usuario-->
@@ -69,6 +81,10 @@ rel="stylesheet" />
                                 <div>
                                     <input type="password" id="password" class="form-control input" name="password" placeholder="Ej: Contraseña123" >
                                     <span></span>
+                                    <!-- si hubo errores en este campo del form, devuelve un mensaje de error -->
+                                    <% if (locals.errors && errors.password) { %>
+                                        <p class="feedback"><%= errors.password.msg %></p>
+                                    <% } %>  
                                     
                                 </div>
                             </div>
@@ -80,13 +96,17 @@ rel="stylesheet" />
                                 <div>
                                     <input type="password" id="confirmPassword" class="form-control input" name="confirmPassword" >
                                     <span></span>
+                                    <!-- si hubo errores en este campo del form, devuelve un mensaje de error -->
+                                    <% if (locals.errors && errors.confirmPassword) { %>
+                                        <p class="feedback"><%= errors.confirmPassword.msg %></p>
+                                    <% } %>  
                                 </div>
                             </div>
                         </div>
                         
-                        <!--boton + captcha + redireccion-->
+                        
                         <div>
-                            <!-- falta captcha -->  
+                          
                             <button = type="submit" class="boton color_especial">Registrar</button>                                
                             <p>¿Ya tenes una cuenta? <a href="/user/login" class="color_especial redireccion">Inicia sesión</a><p> 
                         </div>
@@ -107,8 +127,9 @@ rel="stylesheet" />
   
 
     </main>
-
+    <script src="/js/validacionRegistro.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>  
     
 </body>
+
 </html>
